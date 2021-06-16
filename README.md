@@ -2,12 +2,21 @@
 
 **_ !!! WIP !!! _**
 
-API CRUD example made with vanilla PHP for practice.
+API CRUD example made with vanilla PHP for practice. This API will expose a cooking recipes database.
+
+<b> Models : </b>
+
+- Recipe: id, author_id, name, meal_type, cooking_time, baking_time, difficulty, price_category.
+- Ingredient: id, name.
+- User: id, firstname, lastname, username, email, password.
+- Step: id, number, name, description, recipe_id.
+- Document: id, file, recipe_id.
+- RecipesIngredients: id, recipe_id, ingredient_id.
 
 ### Tools
 
 - PHP 8
-- PDO
+- PHP extensions: pdo, mysql
 - MySQL Workbench
 
 ### Setup database
@@ -18,4 +27,6 @@ API CRUD example made with vanilla PHP for practice.
    - dns : e.g. `host=localhost` ; `dbname=example`
    - user: your database connection username
    - password: your database connection password
-3. Now it's time to make the required migrations !
+3. Now it's time to make the required migrations !  
+   In your terminal, in navigate to src/database directory and type : `php migrations.php`
+4. Now that tables are created, it's time for some seeding.
