@@ -69,4 +69,4 @@ class Step extends Model
     }
 }
 
-return new User($db);
+return new Step($db);

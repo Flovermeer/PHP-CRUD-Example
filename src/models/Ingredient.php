@@ -65,4 +65,4 @@ class Ingredient extends Model
     }
 }
 
-return new User($db);
+return new Ingredient($db);
