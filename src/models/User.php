@@ -30,6 +30,40 @@ class User extends Model
         $this->readOne->execute();
         return $this->readOne->fetch();
     }
+
+    public function create($data)
+    {
+        $input = filter_input_array(INPUT_POST, [
+            'firstname' => FILTER_SANITIZE_SPECIAL_CHARS,
+            'lastname' => FILTER_SANITIZE_SPECIAL_CHARS,
+            'username' => FILTER_SANITIZE_SPECIAL_CHARS,
+            'email' => FILTER_SANITIZE_EMAIL,
+        ]);
+
+        try {
+            $this->create->bindValue(':firstname', $input['firstname']);
+            $this->create->bindValue(':lastname', $input['lastname']);
+            $this->create->bindValue(':username', $input['username']);
+            $this->create->bindValue(':email', $input['email']);
+            $this->create->bindValue(':password', password_hash($data['password'], PASSWORD_ARGON2I));
+            $this->create->execute();
+
+            return $this->readOne($this->db->lastInsertId());
+        } catch (\PDOException $e) {
+            return $e->getMessage();
+        }
+    }
+
+    public function delete($id)
+    {
+        try {
+            $this->delete->bindValue(':id', $id);
+            $this->delete->execute();
+            return "User: $id deleted";
+        } catch (\PDOException $e) {
+            return $e->getMessage();
+        }
+    }
 }
 
 return new User($db);
