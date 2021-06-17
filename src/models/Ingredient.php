@@ -11,7 +11,7 @@ class Ingredient extends Model
     public function __construct(\PDO $db)
     {
         parent::__construct($db);
-        $this->readAll = $db->prepare('SELECT * FROM ingredients');
+        $this->readAll = $db->prepare('SELECT * FROM ingredients ORDER BY id');
         $this->readOne = $db->prepare('SELECT * FROM ingredients WHERE id=:id');
         $this->create = $db->prepare('INSERT INTO ingredients VALUES(DEFAULT, :name)');
         $this->update = $db->prepare('UPDATE ingredients SET name=:name');

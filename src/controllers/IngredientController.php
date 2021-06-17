@@ -17,6 +17,8 @@ class IngredientController implements IController
 
     public function create($data)
     {
+        $result = $this->ingredients->create($data);
+        return json_encode($result);
     }
 
     public function readAll()
@@ -33,10 +35,14 @@ class IngredientController implements IController
 
     public function update(int $id)
     {
+        $result = $this->ingredients->update($id);
+        return json_encode($result);
     }
 
     public function delete(int $id)
     {
+        $result = $this->ingredients->delete($id);
+        return json_encode($result);
     }
 }
 
