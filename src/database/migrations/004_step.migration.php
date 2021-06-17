@@ -11,6 +11,7 @@ try {
     FOREIGN KEY (recipe_id) 
         REFERENCES recipes(id)
         ON DELETE CASCADE
+    UNIQUE unique_index(number, recipe_id)
     );';
 
     $db->exec($steps);
