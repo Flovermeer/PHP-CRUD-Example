@@ -30,3 +30,21 @@ API CRUD example made with vanilla PHP for practice. This API will expose a cook
 3. Now it's time to make the required migrations !  
    In your terminal, navigate to `src/database` folder and type : `php migrations.php`
 4. Now that the tables have been created, it's time for some seeding :seedling:.
+   In your terminal, stay in `src/database` folder and type : `php seeders.php`
+5. Go back to the root folder, where `index.php` file is. In your terminal type: `php -S localhost:8000` or whatever port your want.
+
+### Testing the Api
+
+The app should be running. I suggest you use Postman to test the different endpoints.
+
+Here are the routes :
+
+- `/users` : GET, POST
+- `/users/<id>`: GET, DELETE
+- `/users/<id>/recipes` : GET
+- `/ingredients`: GET, POST
+- `/ingredients`: GET, DELETE
+- `/steps`: GET, POST
+- `/steps`: GET, DELETE
+- `/recipes`: GET, POST
+- `/recipes`: GET, DELETE

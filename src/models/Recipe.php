@@ -12,7 +12,13 @@ class Recipe extends Model
     {
         parent::__construct($db);
         $this->readAll = $db->prepare('SELECT * FROM recipes ORDER BY id');
-        $this->readOne = $db->prepare('SELECT * FROM recipes WHERE id=:id');
+        $this->readOne = $db->prepare("SELECT recipes.name as 'Recipe name', recipes.difficulty, recipes.price_category, recipes.cooking_time, recipes.baking_time, recipes.meal_type, recipes.author_id, JSON_ARRAYAGG(ingredients.name) as ingredient, JSON_ARRAY(JSON_OBJECTAGG(steps.number, steps.description)) as steps  FROM recipes 
+        JOIN steps ON recipes.id = steps.recipe_id
+        JOIN recipes_ingredients ON recipes.id = recipes_ingredients.recipe_id
+        JOIN ingredients ON recipes_ingredients.ingredient_id = ingredients.id
+        WHERE recipes.id = :id 
+        GROUP BY recipes.id
+        ;");
         $this->create = $db->prepare('INSERT INTO recipes VALUES(DEFAULT, :name, :difficulty, :price_category, :cooking_time, :baking_time, :meal_type, :author_id)');
         $this->update = $db->prepare('UPDATE recipes SET name=:name, difficulty=:difficulty, price_category=:price_category, cooking_time=:cooking_time, baking_time=:baking_time, meal_type=:meal_type, author_id=:author_id');
         $this->delete = $db->prepare('DELETE FROM recipes WHERE id=:id');
@@ -28,6 +34,7 @@ class Recipe extends Model
     {
         $this->readOne->bindValue(':id', $id);
         $this->readOne->execute();
+
         return $this->readOne->fetch();
     }
 

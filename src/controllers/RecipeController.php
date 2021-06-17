@@ -30,6 +30,10 @@ class RecipeController implements IController
     public function readOne(int $id)
     {
         $result = $this->recipes->readOne($id);
+
+        $result['steps'] = json_decode($result['steps']);
+        $result['ingredient'] = json_decode($result['ingredient']);
+
         return json_encode($result);
     }
 
