@@ -12,23 +12,29 @@ $method = $_SERVER['REQUEST_METHOD'];
 $query = $_SERVER['QUERY_STRING'] ?? null;
 $matches = null;
 
+
+
 if ($path === '/users' && $method === 'GET') {
     print($users_controller->readAll());
 }
 
-if (preg_match('/^(\/users\/)\d+/', $path) && $method === 'GET') {
+if (preg_match('/^(\/users\/)\d+\/(recipes)$/', $path) && $method === 'GET') {
+    $x = explode('/', $path);
+    $id = $x[2];
+    print($users_controller->getUserRecipes($id));
+} else if (preg_match('/^(\/users\/)\d+$/', $path) && $method === 'GET') {
     $id = substr(strrchr($path, "/"), 1);
     print($users_controller->readOne($id));
 }
 
-if (preg_match('/^(\/users\/)\d+/', $path) && $method === 'DELETE') {
+if (preg_match('/^(\/users\/)\d+$/', $path) && $method === 'DELETE') {
     $id = substr(strrchr($path, "/"), 1);
     print($users_controller->delete($id));
 }
 
-if (preg_match('/^(\/users\/)\d+/', $path) && $method === 'PATCH') {
-    // $id = substr(strrchr($path, "/"), 1);
-    // print($users_controller->update($id));
+if (preg_match('/^(\/users\/)\d+$/', $path) && $method === 'PATCH') {
+    $id = substr(strrchr($path, "/"), 1);
+    print($users_controller->update($id));
     // TODO
 }
 

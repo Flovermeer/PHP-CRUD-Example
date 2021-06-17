@@ -33,7 +33,6 @@ class UserController implements IController
 
     public function readOne(int $id)
     {
-
         $result = $this->users->readOne($id);
         return json_encode($result);
     }
@@ -47,6 +46,12 @@ class UserController implements IController
     public function delete(int $id)
     {
         $result = $this->users->delete($id);
+        return json_encode($result);
+    }
+
+    public function getUserRecipes(int $id)
+    {
+        $result = $this->users->getRecipes($id);
         return json_encode($result);
     }
 }
