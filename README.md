@@ -28,5 +28,5 @@ API CRUD example made with vanilla PHP for practice. This API will expose a cook
    - user: your database connection username
    - password: your database connection password
 3. Now it's time to make the required migrations !  
-   In your terminal, in navigate to src/database directory and type : `php migrations.php`
-4. Now that tables are created, it's time for some seeding.
+   In your terminal, navigate to `src/database` folder and type : `php migrations.php`
+4. Now that the tables have been created, it's time for some seeding :seedling:.

@@ -1,4 +1,4 @@
 <?php
-$db = require_once(__DIR__ . '/src/database/database.php');
 
-require_once(__DIR__ . '/src/database/migrations.php');
+$db = require __DIR__ . '/src/database/database.php';
+require __DIR__ . '/src/router/api.php';
